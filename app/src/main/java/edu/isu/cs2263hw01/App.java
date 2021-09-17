@@ -7,24 +7,26 @@ import org.apache.commons.cli.*;
 
 public class App {
 
-    public static void main(String[] args) {
-
-    }
-
-    public static void cLIOptions() throws ParseException {
+    public static void main(String[] args) throws ParseException {
         Options options = new Options();
-        Option option1 = new Option("-b","--batch");
+        Option option1 = new Option("b","batch", true,"Upload a batch file to evaluate.");
         options.addOption(option1);
 
-        Option option2 = new Option("-h", "--help");
+        Option option2 = new Option("h", "help", false, "Prints the help message and exits the program.");
         options.addOption(option2);
 
-        Option option3 = new Option("-o", "--output");
+        Option option3 = new Option("o", "output", true,"--output");
         options.addOption(option3);
 
         CommandLineParser commandLineParser = new DefaultParser();
-        String[] arguments = new String[]{"-b", "-h", "-o"};
-        CommandLine commandLine = commandLineParser.parse(options, arguments);
-        
+        CommandLine commandLine = commandLineParser.parse(options, args);
+
+        if (commandLine.hasOption("h")){
+            System.out.println("-b --batch <file>  batch file containing expressions to evaluate." +
+                    "\n-h, --help print usage message. " +
+                    "\n-o, --output <file> output file.");
+        }
+
     }
-}
+
+    }
